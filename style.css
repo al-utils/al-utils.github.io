@@ -1,0 +1,277 @@
+:root {
+    --dark: #2D2B2A;
+    --light: #c6c3bb;
+    --accent: #7fb8ea;
+}
+
+@font-face {
+    font-family: Jost;
+    src: url('/assets/Jost-400-Book.ttf');
+}
+
+@font-face {
+    font-family: Envy Code R;
+    src: url('/assets/Envy\ Code\ R.ttf');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--dark);
+    font-family: Jost, sans-serif;
+}
+
+.menu {
+    width: calc(100% - 58px);
+    background-color: rgb(35, 34, 33);
+    height: 44px;
+    position: fixed;
+    top: 0px;
+    padding-top: 12px;
+    padding-left: 28px;
+    padding-right: 28px;
+    font-size: 22px;
+    color: var(--light);
+    z-index: 5;
+}
+
+.menu a {
+    color: var(--light);
+    text-decoration: none;
+}
+
+.button {
+    background-color: var(--light);
+    color: var(--dark);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 0.25rem;
+    display: inline-block;
+    font-size: 18px;
+}
+
+.menu-link {
+    display: inline-block;
+    height: 26px;
+}
+
+.menu-link:hover {
+    border-bottom: 2px solid var(--accent);
+}
+
+.menu-link.active {
+    border-bottom: 2px solid var(--accent);
+}
+
+.button:hover {
+    transition-duration: 0.3s;
+    filter: brightness(85%);
+}
+
+.home {
+    float: left;
+}
+
+.home span {
+    filter: brightness(50%)
+}
+
+.home-icon {
+    float: left;
+    width: 38px;
+    background-color: var(--dark);
+    border-radius: 0.25rem;
+    height: 38px;
+    margin-right: 10px;
+}
+
+.links {
+    float: right;
+    position: relative;
+}
+
+.links a {
+    font-size: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.mobile-menu-button {
+    float: left;
+    -webkit-mask: url('/assets/menu-2.svg') no-repeat center;
+    mask: url('/assets/menu-2.svg') no-repeat center;
+    width: 20px;
+    height: 30px;
+    background-color: var(--light);
+    margin-top: 3px;
+    margin-right: 15px;
+    display: none;
+}
+
+.mobile-menu {
+    width: 292px;
+    height: calc(100vh - 57px);
+    float: left;
+    position: fixed;
+    bottom: 0px;
+    background-color: #232221;
+    border-top: 1px solid rgba(12, 12, 12, 0.5);
+    transition: transform 0.3s ease-in;
+    z-index: 3;
+}
+
+.mobile-menu.hidden { 
+    transform: translateX(-292px);
+    transition: transform 0.3s ease-out;
+}
+
+.mobile-menu-item .mobile-menu-link {
+    margin-top: 15px;
+}
+
+.mobile-menu-item .button {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.mobile-menu-link {
+    position: relative;
+    font-size: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: var(--light);
+}
+
+.mobile-menu-link.active {
+    color: var(--accent)
+}
+
+.mobile-menu-links {
+    width: 260px;
+    padding: 16px;
+    border-bottom: 1px solid rgba(12, 12, 12, 0.5);
+}
+
+.mobile-menu-links a {
+    text-decoration: none;
+}
+
+.mobile-menu-pages {
+    width: 260px;
+    padding: 16px;
+    display: inline-flex;
+}
+
+.mobile-menu-page {
+    position: relative;
+    font-size: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: var(--light);
+    text-decoration: none;
+}
+
+.mobile-menu-page .active {
+    filter: brightness(100%);
+    color: var(--accent)
+}
+
+@media only screen and (max-width: 740px) {
+    .mobile-menu-button {
+        display: initial;
+    }
+
+    .links {
+        display: none;
+    }
+
+    .pages {
+        display: none;
+    }
+}
+
+.menu-page {
+    float: left;
+    filter: brightness(50%);
+}
+
+.menu-page.active {
+    color: var(--accent);
+    filter: brightness(100%);
+}
+
+.menu-page:hover {
+    transition-duration: 0.3s;
+    filter: brightness(100%)
+}
+
+::selection {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.content {
+    color: var(--light);
+    padding-top: 57px;
+    max-width: 564px;
+    width: 80vw;
+    margin: auto;
+}
+
+.content a {
+    color: var(--accent)
+}
+
+.search input {
+    font-family: Jost;
+    width: 100%;
+}
+
+.search input:focus {
+    outline: none;
+}
+
+.body {
+    padding-top: 50px;
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    grid-template-areas: "b b" "l r" "a a";
+    grid-gap: 10px;
+}
+
+#banner {
+    grid-area: b;
+    max-width: 564px;
+    width: 80vw;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+}
+
+.left {
+    grid-area: l;
+}
+
+.right {
+    grid-area: r;
+    text-align: right;
+}
+
+.about {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    grid-area: a;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+    font-family: Envy Code R;
+    font-size: 15px;
+    background-color: #232121;
+    overflow: auto;
+}
+
+#avatar {
+    border-radius: 0.5rem;
+}
