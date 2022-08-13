@@ -112,11 +112,9 @@ body {
 
 .mobile-menu {
     width: 16.4rem;
-    height: calc(100vh - 57px);
+    height: 100vh;
     padding-top: 57px;
-    float: left;
     position: fixed;
-    bottom: 0px;
     background-color: #232221;
     transition: transform 0.3s ease-in;
     z-index: 3;
@@ -216,6 +214,7 @@ body {
 .content {
     color: var(--light);
     padding-top: 57px;
+    padding-bottom: 50px;
     max-width: 564px;
     width: 80vw;
     margin: auto;
