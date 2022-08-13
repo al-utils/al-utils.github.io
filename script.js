@@ -23,7 +23,7 @@ function toggleSideBar(option) {
 }
 
 window.onclick = (function(e) { // close sidebar after click
-    if (e.target == document.getElementById('mobile-menu-button')) { return }
+    if (e.target.id.includes('mobile')) { return }
     if (sidebar == true) {
         toggleSideBar(false)
     }

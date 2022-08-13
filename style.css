@@ -111,13 +111,13 @@ body {
 }
 
 .mobile-menu {
-    width: 292px;
+    width: 16.4rem;
     height: calc(100vh - 57px);
+    padding-top: 57px;
     float: left;
     position: fixed;
     bottom: 0px;
     background-color: #232221;
-    border-top: 1px solid rgba(12, 12, 12, 0.5);
     transition: transform 0.3s ease-in;
     z-index: 3;
 }
@@ -149,9 +149,9 @@ body {
 }
 
 .mobile-menu-links {
-    width: 260px;
+    width: calc(100% - 32px);
     padding: 16px;
-    border-bottom: 1px solid rgba(12, 12, 12, 0.5);
+    border-bottom: 1px solid rgba(20, 20, 20, 0.5);
 }
 
 .mobile-menu-links a {
@@ -159,9 +159,10 @@ body {
 }
 
 .mobile-menu-pages {
-    width: 260px;
+    width: calc(100% - 32px);
     padding: 16px;
     display: inline-flex;
+    border-top: 1px solid rgba(20, 20, 20, 0.5);
 }
 
 .mobile-menu-page {
