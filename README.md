@@ -1,4 +1,4 @@
-# Anilist Lookup
+# Utilities for Anilist
 Utilities for Anilist (via [Anilist API](https://anilist.co/graphiql))
 
 Contact: [@Java](https://anilist.co/user/5641461)

@@ -1,66 +1,99 @@
-var queryString = window.location.search
-var urlParams = new URLSearchParams(queryString)
-var userQuery = urlParams.get('user')
+var prevSearch = sessionStorage.getItem('search')
+if (prevSearch !== null && prevSearch !== 'undefined') {
+    document.getElementById('search-input').value = prevSearch
+    search()
+}
 
 var pageEle = document.getElementById('page')
 
-if (userQuery == '') {
-    window.open('/lookup', '_self')
-} else if (userQuery !== null) {
-    pageEle.style.display = ''
-}
-
-function search(ele) {
+function enter(ele) {
     if (event.key === 'Enter') {
-        user = ele.value
-        window.open(`/lookup/?user=${user}`, '_self')
+        search()
     }
 }
 
-var url = 'https://graphql.anilist.co'
-var options = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    },
-    body: JSON.stringify({
-        query: `query ($name: String) {
-                    User (name: $name) {
-                        id
-                        name
-                        about
-                        avatar {
-                            large
-                            medium
-                        }
-                
-                        bannerImage
-                        siteUrl
-                        donatorTier
-                        donatorBadge
-                        createdAt
-                        updatedAt
-                
-                        previousNames {
+function search() {
+    document.getElementById('reset').innerHTML = `
+    <div class="page" id="page" style="display:none;">
+        <div class="title" id="title">
+            
+        </div>
+        <div class="body">
+            
+            <div id="banner"></div>
+            <div class="left">
+                <img id="avatar" width="230"></img>
+                <p id="name"></p>
+                <p id="id"></p>
+                <a id="avatar-link" target="_blank" rel="noopener nonreferrer">Avatar</a>
+                |&nbsp<a id="banner-image" target="_blank" rel="noopener nonreferrer">Banner</a>
+                |&nbsp<a id="site-url" target='_blank' rel='noopener nonreferrer'>URL</a>
+            </div>
+            <div class="right">
+                <p id="created-at"></p>
+                <p id="updated-at"></p>
+                <p id="donator"><u>Donator</u>: </p>
+                <p id="donator-tier"></p>
+                <p id="donator-badge"></p>
+                <br>
+                <br>
+                <div class="previous-names" id="previous-names"><u>Previous Names</u>: </div>
+                <br>
+                <p id="following"></p>
+                <p id="followers"></p>
+            </div>
+            <div class="about-title">Raw About: </div>
+            <pre class="about" id="about"></pre>
+        </div>
+    </div>
+    <div id="error" style="display:none;">
+        (&nbsp!&nbsp) User not found
+    </div>
+    `
+    var user = document.getElementById('search-input').value
+    var url = 'https://graphql.anilist.co'
+    var options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            query: `query ($name: String) {
+                        User (name: $name) {
+                            id
                             name
+                            about
+                            avatar {
+                                large
+                                medium
+                            }
+                    
+                            bannerImage
+                            siteUrl
+                            donatorTier
+                            donatorBadge
                             createdAt
                             updatedAt
+                    
+                            previousNames {
+                                name
+                                createdAt
+                                updatedAt
+                            }
                         }
-                    }
-                }`,
-        variables: {
-            name: userQuery
-        }
-    })
-}
-
-if (userQuery) {
+                    }`,
+            variables: {
+                name: user
+            }
+        })
+    }
     fetch(url, options).then(handleResponse)
-                       .then(handleData)
-                       .catch((error) => {
-                        window.open('/lookup', '_self')
-                       })
+        .then(handleData)
+        .catch((error) => {
+            console.log(error)
+            document.getElementById('error').style.display = ''
+        })
 }
 
 function handleResponse(response) {
@@ -85,7 +118,7 @@ function handleData(data) {
 
     document.getElementById('id').textContent = 'ID: ' + id
     document.getElementById('name').textContent = 'Name: ' + name
-    document.getElementById('about').textContent = about    
+    document.getElementById('about').textContent = about
     document.getElementById('avatar').src = avatarLarge
     document.getElementById('avatar-link').href = avatarLarge
     document.getElementById('banner').style.backgroundImage = `url('${bannerImage}')`
@@ -103,6 +136,11 @@ function handleData(data) {
     document.getElementById('updated-at').textContent = `Last Updated: ${updatedAt.getMonth() + 1}/${updatedAt.getDate()}/${updatedAt.getFullYear()}`
 
     var div = document.getElementById('previous-names')
+    if (previousNames.length == 0) {
+        var none = document.createElement('p')
+        none.textContent = '- - -'
+        div.append(none)
+    }
     Object.keys(previousNames).forEach(function(key) {
         var name = document.createElement('p')
         name.textContent = previousNames[key]['name']
@@ -111,5 +149,59 @@ function handleData(data) {
         name.title = `${start.getMonth()}/${start.getDate()}/${start.getFullYear()} - ${end.getMonth()}/${end.getDate()}/${end.getFullYear()}`
         div.append(name)
     })
+    document.getElementById('page').style.display = ''
+    sessionStorage.setItem('search', user['name'])
 
+    var url = 'https://graphql.anilist.co'
+    var options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+            query: `query ($id: Int!) {
+                        followers: Page (page: 1, perPage: 1) {
+                            pageInfo {
+                                total
+                            }
+                            followers (userId: $id) {
+                                id
+                            }
+                        }
+                        following: Page (page: 1, perPage: 1) {
+                            pageInfo {
+                                total
+                            }
+                            following (userId: $id) {
+                                id
+                            }
+                        }
+                    }`,
+            variables: {
+                id: id
+            }
+        })
+    }
+    fetch(url, options).then(handleResponseFollow)
+        .then(handleDataFollow)
+        .catch((error) => {
+            console.log(error)
+        })
+
+    function handleResponseFollow(response) {
+        return response.json().then(function (json) {
+            return response.ok ? json : Promise.reject(json);
+        });
+    }
+
+    function handleDataFollow(data) {
+        console.log(data)
+        var following = document.getElementById('following')
+        var followers = document.getElementById('followers')
+        following.textContent = 'Following: ' + data['data']['following']['pageInfo']['total']
+        followers.textContent = 'Followers: ' + data['data']['followers']['pageInfo']['total']
+    }
 }
+
+// good luck to future me when i try to fix this code

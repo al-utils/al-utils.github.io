@@ -18,41 +18,14 @@
     <div class="content">
 
         <div class="search" id="search">
-            <h1>Lookup for <a href='https://anilist.co/' target='_blank' rel='noopener nonreferrer'>Anilist</a></h1>
+            <h1 onclick="search()">Lookup for <a href='https://anilist.co/' target='_blank' rel='noopener nonreferrer'>Anilist</a></h1>
             <div class="search">
-                <input type="text" placeholder="Enter a Username" onkeydown="search(this)">
+                <input id="search-input" type="text" placeholder="Enter a Username" onkeydown="enter(this)">
             </div>
+            <div class="button" id="search-button" onclick="search()">Lookup</div>
         </div>
-        <div class="page" id="page" style="display:none;">
-            <div class="title" id="title">
-                
-            </div>
-            <div class="body">
-                
-                <div id="banner"></div>
-                <div class="left">
-                    <img id="avatar" width="230"></img>
-                    <p id="name"></p>
-                    <p id="id"></p>
-                    <a id="avatar-link" target="_blank" rel="noopener nonreferrer">Avatar</a>
-                    |&nbsp<a id="banner-image" target="_blank" rel="noopener nonreferrer">Banner</a>
-                    |&nbsp<a id="site-url" target='_blank' rel='noopener nonreferrer'>URL</a>
-                </div>
-                <div class="right">
-                    <p id="created-at"></p>
-                    <p id="updated-at"></p>
-                    <p id="donator"><u>Donator</u>: </p>
-                    <p id="donator-tier"></p>
-                    <p id="donator-badge"></p>
-                    <br>
-                    <br>
-                    <div class="previous-names" id="previous-names"><u>Previous Names</u>: </div>
-                </div>
-                <code class="about" id="about"></code>
-
-            </div>
+        <div id="reset">
         </div>
-        
     </div>
 </body>
     <script type="text/javascript" src="/lookup/script.js"></script>
