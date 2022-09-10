@@ -18,11 +18,11 @@
     <div class="content">
 
         <div class="search" id="search">
-            <h1 onclick="search()">Lookup for <a href='https://anilist.co/' target='_blank' rel='noopener nonreferrer'>Anilist</a></h1>
+            <h1>Lookup for <a href='https://anilist.co/' target='_blank' rel='noopener nonreferrer'>Anilist</a></h1>
             <div class="search">
                 <input id="search-input" type="text" placeholder="Enter a Username" onkeydown="enter(this)">
             </div>
-            <div class="button" id="search-button" onclick="search()">Lookup</div>
+            <div class="button" id="search-button" onclick="window.open('/lookup/?user=' + document.getElementById('search-input').value, '_self')">Lookup</div>
         </div>
         <div id="reset">
         </div>

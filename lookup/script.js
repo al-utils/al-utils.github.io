@@ -1,18 +1,25 @@
-var prevSearch = sessionStorage.getItem('search')
-if (prevSearch !== null && prevSearch !== 'undefined') {
-    document.getElementById('search-input').value = prevSearch
+var queryString = window.location.search
+var urlParams = new URLSearchParams(queryString)
+var userQuery = urlParams.get('user')
+var pageEle = document.getElementById('page')
+
+if (userQuery !== '' && userQuery !== null) {
     search()
 }
 
-var pageEle = document.getElementById('page')
-
 function enter(ele) {
-    if (event.key === 'Enter') {
-        search()
+    if (event.key === 'Enter' && user !== '') {
+        var user = document.getElementById('search-input').value
+        window.open('/lookup/?user=' + user, '_self')
     }
 }
 
 function search() {
+    var user = urlParams.get('user')
+    if (user == '' || user === null) {
+        return
+    }
+
     document.getElementById('reset').innerHTML = `
     <div class="page" id="page" style="display:none;">
         <div class="title" id="title">
@@ -50,7 +57,7 @@ function search() {
         (&nbsp!&nbsp) User not found
     </div>
     `
-    var user = document.getElementById('search-input').value
+
     var url = 'https://graphql.anilist.co'
     var options = {
         method: 'POST',
@@ -91,7 +98,7 @@ function search() {
     fetch(url, options).then(handleResponse)
         .then(handleData)
         .catch((error) => {
-            console.log(error)
+            // console.log(error)
             document.getElementById('error').style.display = ''
         })
 }
@@ -118,6 +125,7 @@ function handleData(data) {
 
     document.getElementById('id').textContent = 'ID: ' + id
     document.getElementById('name').textContent = 'Name: ' + name
+    document.title = '@' + name + ' | al-utils'
     document.getElementById('about').textContent = about
     document.getElementById('avatar').src = avatarLarge
     document.getElementById('avatar-link').href = avatarLarge
@@ -150,7 +158,6 @@ function handleData(data) {
         div.append(name)
     })
     document.getElementById('page').style.display = ''
-    sessionStorage.setItem('search', user['name'])
 
     var url = 'https://graphql.anilist.co'
     var options = {
@@ -186,7 +193,7 @@ function handleData(data) {
     fetch(url, options).then(handleResponseFollow)
         .then(handleDataFollow)
         .catch((error) => {
-            console.log(error)
+            // console.log(error)
         })
 
     function handleResponseFollow(response) {
@@ -196,7 +203,6 @@ function handleData(data) {
     }
 
     function handleDataFollow(data) {
-        console.log(data)
         var following = document.getElementById('following')
         var followers = document.getElementById('followers')
         following.textContent = 'Following: ' + data['data']['following']['pageInfo']['total']
