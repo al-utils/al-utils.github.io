@@ -4,56 +4,72 @@ var userQuery = urlParams.get('user')
 var pageEle = document.getElementById('page')
 
 if (userQuery !== '' && userQuery !== null) {
-    search()
-}
-
-function enter(ele) {
-    if (event.key === 'Enter' && user !== '') {
-        var user = document.getElementById('search-input').value
-        window.open('/lookup/?user=' + user, '_self')
+    users = userQuery.split(',')
+    for (user of users) {
+        search(user)
     }
 }
 
-function search() {
-    var user = urlParams.get('user')
+function enter(ele) {
+    var user = document.getElementById('search-input').value
+    if (event.key === 'Enter' && user !== '') {
+        addUser()
+    }
+}
+
+function newSearch() {
+    var user = document.getElementById('search-input').value
+    user = user.replaceAll(', ', ',')
+    window.open('/lookup/?user=' + user, '_self')
+}
+
+function addUser() {
+    var s = document.getElementById('search-input')
+    var users = s.value.replaceAll(', ', ',')
+    users = users.split(',')
+    for (user of users) {
+        search(user)
+    }
+    s.value = ''
+    s.focus()
+}
+
+function search(user) {
     if (user == '' || user === null) {
         return
     }
 
-    document.getElementById('reset').innerHTML = `
-    <div class="page" id="page" style="display:none;">
-        <div class="title" id="title">
-            
-        </div>
+    document.getElementById('reset').innerHTML += `
+    <div class="page" id="page-${user}" style="display:none;">
         <div class="body">
             
-            <div id="banner"></div>
+            <div id="banner-${user}" class="banner"></div>
             <div class="left">
-                <img id="avatar" width="230"></img>
-                <p id="name"></p>
-                <p id="id"></p>
-                <a id="avatar-link" target="_blank" rel="noopener nonreferrer">Avatar</a>
-                |&nbsp<a id="banner-image" target="_blank" rel="noopener nonreferrer">Banner</a>
-                |&nbsp<a id="site-url" target='_blank' rel='noopener nonreferrer'>URL</a>
+                <img id="avatar-${user}" width="230"></img>
+                <p id="name-${user}"></p>
+                <p id="id-${user}"></p>
+                <a id="avatar-link-${user}" target="_blank" rel="noopener nonreferrer">Avatar</a>
+                |&nbsp<a id="banner-image-${user}" target="_blank" rel="noopener nonreferrer">Banner</a>
+                |&nbsp<a id="site-url-${user}" target='_blank' rel='noopener nonreferrer'>URL</a>
             </div>
             <div class="right">
-                <p id="created-at"></p>
-                <p id="updated-at"></p>
-                <p id="donator"><u>Donator</u>: </p>
-                <p id="donator-tier"></p>
-                <p id="donator-badge"></p>
+                <p id="created-at-${user}"></p>
+                <p id="updated-at-${user}"></p>
+                <p id="donator-${user}"><u>Donator</u>: </p>
+                <p id="donator-tier-${user}"></p>
+                <p id="donator-badge-${user}"></p>
                 <br>
                 <br>
-                <div class="previous-names" id="previous-names"><u>Previous Names</u>: </div>
+                <div class="previous-names" id="previous-names-${user}"><u>Previous Names</u>: </div>
                 <br>
-                <p id="following"></p>
-                <p id="followers"></p>
+                <p id="following-${user}"></p>
+                <p id="followers-${user}"></p>
             </div>
             <div class="about-title">Raw About: </div>
-            <pre class="about" id="about"></pre>
+            <pre class="about" id="about-${user}"></pre>
         </div>
     </div>
-    <div id="error" style="display:none;">
+    <div id="error-${user}" class="page" style="display:none;">
         (&nbsp!&nbsp) User not found
     </div>
     `
@@ -99,7 +115,7 @@ function search() {
         .then(handleData)
         .catch((error) => {
             // console.log(error)
-            document.getElementById('error').style.display = ''
+            document.getElementById('error-' + user).style.display = ''
         })
 }
 
@@ -122,28 +138,30 @@ function handleData(data) {
     var createdAt = new Date(user['createdAt'] * 1000)
     var updatedAt = new Date(user['updatedAt'] * 1000)
     var previousNames = user['previousNames']
+    
+    var n = name.toLowerCase()
 
-    document.getElementById('id').textContent = 'ID: ' + id
-    document.getElementById('name').textContent = 'Name: ' + name
+    document.getElementById('id-' + n).textContent = 'ID: ' + id
+    document.getElementById('name-' + n).textContent = 'Name: ' + name
     document.title = '@' + name + ' | al-utils'
-    document.getElementById('about').textContent = about
-    document.getElementById('avatar').src = avatarLarge
-    document.getElementById('avatar-link').href = avatarLarge
-    document.getElementById('banner').style.backgroundImage = `url('${bannerImage}')`
-    document.getElementById('banner-image').href = bannerImage
-    document.getElementById('site-url').href = siteUrl
+    document.getElementById('about-' + n).textContent = about
+    document.getElementById('avatar-' + n).src = avatarLarge
+    document.getElementById('avatar-link-' + n).href = avatarLarge
+    document.getElementById('banner-' + n).style.backgroundImage = `url('${bannerImage}')`
+    document.getElementById('banner-image-' + n).href = bannerImage
+    document.getElementById('site-url-' + n).href = siteUrl
     if (donatorTier > 0) {
-        document.getElementById('donator-tier').textContent = 'Donator Tier: ' + donatorTier
-        document.getElementById('donator-badge').textContent = 'Donator Badge: ' + donatorBadge
+        document.getElementById('donator-tier-' + n).textContent = 'Donator Tier: ' + donatorTier
+        document.getElementById('donator-badge-' + n).textContent = 'Donator Badge: ' + donatorBadge
     } else {
-        document.getElementById('donator').style.display = 'none'
-        document.getElementById('donator-tier').style.display = 'none'
-        document.getElementById('donator-badge').style.display = 'none'
+        document.getElementById('donator-' + n).style.display = 'none'
+        document.getElementById('donator-tier-' + n).style.display = 'none'
+        document.getElementById('donator-badge-' + n).style.display = 'none'
     }
-    document.getElementById('created-at').textContent = `Joined: ${createdAt.getMonth() + 1}/${createdAt.getDate()}/${createdAt.getFullYear()}`
-    document.getElementById('updated-at').textContent = `Last Updated: ${updatedAt.getMonth() + 1}/${updatedAt.getDate()}/${updatedAt.getFullYear()}`
+    document.getElementById('created-at-' + n).textContent = `Joined: ${createdAt.getMonth() + 1}/${createdAt.getDate()}/${createdAt.getFullYear()}`
+    document.getElementById('updated-at-' + n).textContent = `Last Updated: ${updatedAt.getMonth() + 1}/${updatedAt.getDate()}/${updatedAt.getFullYear()}`
 
-    var div = document.getElementById('previous-names')
+    var div = document.getElementById('previous-names-' + n)
     if (previousNames.length == 0) {
         var none = document.createElement('p')
         none.textContent = '- - -'
@@ -157,7 +175,7 @@ function handleData(data) {
         name.title = `${start.getMonth()}/${start.getDate()}/${start.getFullYear()} - ${end.getMonth()}/${end.getDate()}/${end.getFullYear()}`
         div.append(name)
     })
-    document.getElementById('page').style.display = ''
+    document.getElementById('page-' + n).style.display = ''
 
     var url = 'https://graphql.anilist.co'
     var options = {
@@ -203,8 +221,8 @@ function handleData(data) {
     }
 
     function handleDataFollow(data) {
-        var following = document.getElementById('following')
-        var followers = document.getElementById('followers')
+        var following = document.getElementById('following-' + n)
+        var followers = document.getElementById('followers-' + n)
         following.textContent = 'Following: ' + data['data']['following']['pageInfo']['total']
         followers.textContent = 'Followers: ' + data['data']['followers']['pageInfo']['total']
     }

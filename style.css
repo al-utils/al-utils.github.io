@@ -50,6 +50,7 @@ body {
     border-radius: 0.25rem;
     display: inline-block;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .menu-link {
@@ -230,9 +231,16 @@ body {
 }
 
 #search-input {
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid var(--light);
+    color: var(--light);
     font-family: Jost;
     width: 100%;
     float: left;
+    height: 30px;
+    font-size: 17px;
+    padding-top: 30px;
 }
 
 #search-input:focus {
@@ -247,17 +255,16 @@ body {
 }
 
 .body {
-    padding-top: 50px;
+    /* padding-top: 50px; */
     display: grid;
     grid-template-columns: 230px 1fr;
     grid-template-areas: "b b" "l r" "t t" "a a";
     grid-gap: 10px;
 }
 
-#banner {
+.banner {
     grid-area: b;
-    max-width: 564px;
-    width: 80vw;
+    width: 100%;
     height: 100px;
     background-size: cover;
     background-position: center;
@@ -286,7 +293,8 @@ body {
 
 .about::-webkit-scrollbar {
     display: none;
-  }
+}
+
 .about {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -335,4 +343,40 @@ body {
     height: 50px;
     background-color: var(--light);
     padding-left: calc(100% - 50px)
+}
+
+#reset {
+    width: 100vw;
+    position: absolute;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-y: scroll;
+    grid-gap: 20px;
+}
+
+
+#reset {
+    color: var(--light);
+    width: 80vw;
+    margin-left: 10vw;
+    height: 80vh;
+}
+
+#reset a {
+    color: var(--accent)
+}
+
+.page {
+    width: 500px;
+    flex: 0 0 auto;
+    overflow-y: scroll;
+}
+
+.page::-webkit-scrollbar {
+    display: none;
+}
+
+.page {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
