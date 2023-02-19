@@ -1,12 +1,13 @@
 :root {
     --dark: #2D2B2A;
     --light: #c6c3bb;
-    --accent: #7fb8ea;
+    --accent: #1c74c1;
 }
 
 @font-face {
-    font-family: Jost;
-    src: url('/assets/Jost-400-Book.ttf');
+    font-family: Space Grotesk;
+    src: url('/assets/SpaceGrotesk[wght].ttf');
+    font-weight: 400;
 }
 
 @font-face {
@@ -17,8 +18,8 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--dark);
-    font-family: Jost, sans-serif;
+    background-color: var(--light);
+    font-family: Space Grotesk, sans-serif;
 }
 
 .menu {
@@ -31,18 +32,18 @@ body {
     padding-left: 28px;
     padding-right: 28px;
     font-size: 22px;
-    color: var(--light);
+    color: var(--dark);
     z-index: 5;
 }
 
 .menu a {
-    color: var(--light);
+    color: var(--dark);
     text-decoration: none;
 }
 
 .button {
-    background-color: var(--light);
-    color: var(--dark);
+    background-color: var(--dark);
+    color: white;
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 16px;
@@ -51,6 +52,11 @@ body {
     display: inline-block;
     font-size: 18px;
     cursor: pointer;
+    user-select: none;
+}
+
+.button p {
+    line-height: 0px;
 }
 
 .menu-link {
@@ -82,7 +88,7 @@ body {
 .home-icon {
     float: left;
     width: 38px;
-    background-color: var(--dark);
+    background-color: var(--light);
     border-radius: 0.25rem;
     height: 38px;
     margin-right: 10px;
@@ -105,7 +111,7 @@ body {
     mask: url('/assets/menu-2.svg') no-repeat center;
     width: 20px;
     height: 30px;
-    background-color: var(--light);
+    background-color: var(--dark);
     margin-top: 3px;
     margin-right: 15px;
     display: none;
@@ -140,7 +146,7 @@ body {
     font-size: 16px;
     padding-left: 8px;
     padding-right: 8px;
-    color: var(--light);
+    color: var(--dark);
 }
 
 .mobile-menu-link.active {
@@ -169,7 +175,7 @@ body {
     font-size: 16px;
     padding-left: 8px;
     padding-right: 8px;
-    color: var(--light);
+    color: var(--dark);
     text-decoration: none;
 }
 
@@ -208,20 +214,31 @@ body {
 }
 
 ::selection {
-    background-color: var(--light);
-    color: var(--dark);
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.pattern {
+    position: fixed;
+    bottom: 0px;
+    width: 100vw;
+    height: 100vh;
+    background-image: url(/assets/pattern.png);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
 }
 
 .content {
-    color: var(--light);
-    padding-top: 57px;
+    color: var(--dark);
     padding-bottom: 50px;
     max-width: 564px;
     width: 80vw;
     margin: auto;
 }
 
-.content a {
+a {
     color: var(--accent)
 }
 
@@ -233,9 +250,9 @@ body {
 #search-input {
     background: transparent;
     border: none;
-    border-bottom: 3px solid var(--light);
-    color: var(--light);
-    font-family: Jost;
+    border-bottom: 3px solid var(--dark);
+    color: var(--dark);
+    font-family: Space Grotesk, sans-serif;
     width: 100%;
     float: left;
     height: 30px;
@@ -247,7 +264,7 @@ body {
     outline: none;
 }
 
-#search-button {
+#add-user-button {
     margin-top: 15px;
     cursor: pointer;
     user-select: none;
@@ -258,16 +275,16 @@ body {
     /* padding-top: 50px; */
     display: grid;
     grid-template-columns: 230px 1fr;
-    grid-template-areas: "b b" "l r" "t t" "a a";
+    grid-template-areas: "l r" "t t" "a a";
     grid-gap: 10px;
 }
 
 .banner {
-    grid-area: b;
     width: 100%;
-    height: 100px;
+    height: 7rem;
     background-size: cover;
     background-position: center;
+    border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .left {
@@ -280,14 +297,14 @@ body {
 }
 
 .about {
-    margin-bottom: 50px;
     grid-area: a;
     padding: 10px;
-    border: 1px solid #000;
+    border: 2px solid #000;
     border-radius: 0.5rem;
     font-family: Envy Code R;
     font-size: 15px;
-    background-color: #232121;
+    background-color: var(--dark);
+    color: var(--light);
     overflow: auto;
 }
 
@@ -300,12 +317,18 @@ body {
     scrollbar-width: none;  /* Firefox */
 }
 
+.about::selection {
+    background-color: var(--light);
+    color: var(--dark);
+}
+
 .about-title {
     margin-top: 50px;
     grid-area: t;
+    line-height: 0rem;
 }
 
-#avatar {
+.avatar {
     border-radius: 0.5rem;
 }
 
@@ -313,63 +336,26 @@ body {
     padding-top: 15px;
 }
 
-.cards {
+#reset {
+    width: calc(2rem + 90rem);
+    margin: auto;
+    grid-gap: 1rem;
+    color: var(--dark);
+    padding-bottom: 5rem;
     display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(3, calc((100% - 20px) / 3));
-    padding-top: 50px;
-}
-
-.cards a {
-    text-decoration: none;
-    color: var(--light)
-}
-
-.card {
-    height: 120px;
-    background-color: rgb(35, 34, 33);
-    text-align: center;
-    border-radius: 10px;
-    padding-top: 50px;
-}
-
-#search-icon {
-    -webkit-mask: url(/assets/search.svg) no-repeat center;
-    mask: url(/assets/search.svg) no-repeat center;
-}
-
-.card-icon {
-    width: 50px;
-    height: 50px;
-    background-color: var(--light);
-    padding-left: calc(100% - 50px)
-}
-
-#reset {
-    width: 100vw;
-    position: absolute;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-y: scroll;
-    grid-gap: 20px;
-}
-
-
-#reset {
-    color: var(--light);
-    width: 80vw;
-    margin-left: 10vw;
-    height: 80vh;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 #reset a {
-    color: var(--accent)
+    color: var(--accent);
 }
 
 .page {
-    width: 500px;
+    background-color: #efefef;
+    width: 30rem;
     flex: 0 0 auto;
     overflow-y: scroll;
+    border-radius: 1rem;
 }
 
 .page::-webkit-scrollbar {
@@ -379,4 +365,33 @@ body {
 .page {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
+}
+
+.body {
+    padding: 1rem;
+    padding-bottom: 0;
+}
+
+.big {
+    font-size: 25px;
+}
+
+#icon {
+    background-color: var(--dark);
+    mask: url(/assets/anilist.svg) no-repeat 0px 5rem;
+    mask-size: contain;
+    height: 5rem;
+    width: 5rem;
+    margin: auto;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+}
+
+#header {
+    text-align: center;
+    margin: auto;
+}
+
+#header p {
+    line-height: 0px;
 }
