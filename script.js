@@ -36,7 +36,7 @@ function addUser() {
     for (user of users) {
         search(user)
     }
-    s.focus()
+    document.getElementById('search-input').focus()
 }
 
 function userExists(name) {
