@@ -285,6 +285,7 @@ a {
     background-size: cover;
     background-position: center;
     border-radius: 0.5rem 0.5rem 0 0;
+    background-color: var(--dark);
 }
 
 .left {
@@ -356,6 +357,7 @@ a {
     flex: 0 0 auto;
     overflow-y: scroll;
     border-radius: 1rem;
+    position: relative;
 }
 
 .page::-webkit-scrollbar {
@@ -394,4 +396,35 @@ a {
 
 #header p {
     line-height: 0px;
+}
+
+.x-button {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    background-color: white;
+    mask: url(/assets/x.svg) no-repeat;
+    mask-size: contain;
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+}
+
+#errors {
+    position: absolute;
+    width: 20rem;
+    padding: 1rem;
+    right: 0;
+    z-index: 1;
+    user-select: none;
+}
+
+.error {
+    background-color: var(--dark);
+    color: var(--light);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    overflow-wrap: break-word;
+    cursor: pointer;
 }

@@ -9,7 +9,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 </head>
 <body>
+    
+    <div id="errors"></div>
     <div class="pattern"></div>
+    
     <div id="header">
         <div id="icon">
             &nbsp
@@ -17,17 +20,18 @@
         <p id="idk"><u>Un</u>official Tool(s) for <a href="https://anilist.co">Anilist</a> | <a href="https://github.com/al-utils">GitHub</a></p>
         <p style="line-height: 2rem">Contact: <a href="https://anilist.co/user/5641461">@Java</a></p>
     </div>
+    
     <div class="content">
         <div class="search" id="search">
             <div class="search">
-                <input id="search-input" type="text" placeholder="Enter a Username, or Usernames Separated by a Comma" onkeydown="enter(this)">
+                <input id="search-input" type="text" placeholder="Enter a Username(s) Separated by a Comma or Space" onkeydown="enter(this)">
             </div>
             <div class="button" id="search-button" onclick="newSearch()"><p>Search</p></div>
             <div class="button" id="add-user-button" onclick="addUser()"><p>Add</p></div>
         </div>
     </div>
-    <div id="reset">
-    </div>
+    
+    <div id="reset"></div>
 
 </body>
     <script type="text/javascript" src="/script.js"></script>

@@ -25,7 +25,8 @@ function newSearch() {
 
 function addUser() {
     var s = document.getElementById('search-input')
-    var users = s.value.replaceAll(', ', ',')
+    var users = s.value.replaceAll(' ', ',')
+    users = users.replaceAll(', ', ',')
     users = users.split(',')
     for (user of users) {
         search(user)
@@ -38,10 +39,37 @@ function userExists(name) {
     var users = document.getElementById('reset').children
     if (users.length == 0) {return}
     for (user of users) {
-        if (user.id.includes(name))
+        if (user.id.includes(name)) {
             return true
+        }
     }
     return false
+}
+
+function closeUser(name) {
+    var users = document.getElementById('reset')
+    if (users.children.length == 0) {return}
+    for (n in users.children) {
+        if (users.children[n].id.includes(name)) {
+            users.removeChild(users.children[n])
+            return
+        }
+    }
+}
+
+function sendError(name) {
+    var ele = document.createElement('div')
+    ele.classList.add('error')
+    ele.addEventListener("click", function() {
+        errors.removeChild(ele)
+    })
+    ele.innerHTML = '(&nbsp<span style="color: yellow">!</span>&nbsp) User not found: ' + name
+    errors = document.getElementById('errors')
+    errors.insertBefore(ele, errors.firstChild)
+
+    setTimeout(function () {
+        errors.removeChild(ele)
+    }, 5000);
 }
 
 function search(user) {
@@ -53,6 +81,7 @@ function search(user) {
 
     document.getElementById('reset').innerHTML += `
     <div class="page" id="page-${user}" style="display:none;">
+        <div id="x-${user}" class="x-button" onclick="closeUser('${user}')"></div>
         <div id="banner-${user}" class="banner"></div>
         <div class="body">
             
@@ -81,9 +110,6 @@ function search(user) {
         </div>
     </div>
     `
-    // <div id="error-${user}" class="page" style="display:none;">
-    // (&nbsp!&nbsp) User not found: ${user}
-    // </div>
 
     var url = 'https://graphql.anilist.co'
     var options = {
@@ -125,8 +151,10 @@ function search(user) {
     fetch(url, options).then(handleResponse)
         .then(handleData)
         .catch((error) => {
-            // console.log(error)
-            document.getElementById('error-' + user).style.display = ''
+            console.log(error)
+            sendError(user)
+            document.getElementById(`page-${user}`).remove()
+            return
         })
 }
 
