@@ -29,12 +29,12 @@ body {
     background-color: var(--light);
     font-family: Space Grotesk, sans-serif;
     transition-duration: var(--transition-duration);
-    transition-property: background-color;
+    transition-property: background-color, color;
 }
 
 .button {
     background-color: var(--dark);
-    color: var(--light);
+    color: var(--card-background);
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 16px;
@@ -46,6 +46,8 @@ body {
     user-select: none;
     margin-top: 1rem;
     line-height: 0px;
+    transition-duration: var(--transition-duration);
+    transition-property: background-color, color;
 }
 
 .button:hover {
@@ -351,7 +353,7 @@ a {
 }
 
 #theme-icon {
-    background-color: var(--light);
+    background-color: var(--card-background);
     width: 3rem;
     height: 3rem;
     scale: 0.7;

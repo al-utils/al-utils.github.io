@@ -7,9 +7,10 @@ function switchTheme() {
     root = document.querySelector(':root')
     dark = style.getPropertyValue('--dark')
     light = style.getPropertyValue('--light')
+    bg = style.getPropertyValue('--card-background')
     
     delay = 500
-    icon.style.backgroundColor = dark
+    icon.style.backgroundColor = bg
     // this animation took forever to figure out (:
     setTimeout(function () {
         if (current == 'light') {
@@ -19,12 +20,12 @@ function switchTheme() {
             root.style.setProperty('--card-background', 'var(--card-light)')
             icon.setAttribute('theme', 'light')
         }
-        icon.style.backgroundColor = dark
+        bg = style.getPropertyValue('--card-background')
+        icon.style.backgroundColor = bg
     }, delay)
     setTimeout(function () {
         root.style.setProperty('--light', dark)
         root.style.setProperty('--dark', light)
-        icon.style.backgroundColor = light
     }, delay / 2)
 }
 
