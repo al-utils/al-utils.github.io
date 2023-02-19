@@ -3,13 +3,6 @@ var urlParams = new URLSearchParams(queryString)
 var userQuery = urlParams.get('user')
 var pageEle = document.getElementById('page')
 
-function enter(ele) {
-    var user = document.getElementById('search-input').value
-    if (event.key === 'Enter' && user !== '') {
-        addUser()
-    }
-}
-
 if (userQuery !== '' && userQuery !== null) {
     users = userQuery.split(',')
     for (user of users) {
@@ -17,21 +10,32 @@ if (userQuery !== '' && userQuery !== null) {
     }
 }
 
-function newSearch() {
+function enter(ele) {
     var user = document.getElementById('search-input').value
-    user = user.replaceAll(', ', ',')
-    window.open('/?user=' + user, '_self')
+    if (event.key === 'Enter' && user !== '') {
+        addUser()
+    }
 }
 
-function addUser() {
+function searchFormat() {
     var s = document.getElementById('search-input')
     var users = s.value.replaceAll(' ', ',')
     users = users.replaceAll(', ', ',')
+    s.value = ''
+    return users
+}
+
+function newSearch() {
+    users = searchFormat()
+    window.open('/?user=' + users, '_self')
+}
+
+function addUser() {
+    var users = searchFormat()
     users = users.split(',')
     for (user of users) {
         search(user)
     }
-    s.value = ''
     s.focus()
 }
 
@@ -51,7 +55,10 @@ function closeUser(name) {
     if (users.children.length == 0) {return}
     for (n in users.children) {
         if (users.children[n].id.includes(name)) {
-            users.removeChild(users.children[n])
+            users.children[n].style.opacity = 0
+            setTimeout(function () {
+                users.removeChild(users.children[n])
+            }, 500);
             return
         }
     }
@@ -61,15 +68,31 @@ function sendError(name) {
     var ele = document.createElement('div')
     ele.classList.add('error')
     ele.addEventListener("click", function() {
-        errors.removeChild(ele)
+        ele.style.opacity = 0
+        setTimeout(function () {
+            errors.removeChild(ele)
+        }, 500);
     })
     ele.innerHTML = '(&nbsp<span style="color: yellow">!</span>&nbsp) User not found: ' + name
     errors = document.getElementById('errors')
-    errors.insertBefore(ele, errors.firstChild)
+    errors.appendChild(ele)
 
     setTimeout(function () {
-        errors.removeChild(ele)
+        ele.style.opacity = 0
+        setTimeout(function () {
+            errors.removeChild(ele)
+        }, 500);
     }, 5000);
+}
+
+function deleteAllUsers() {
+    var users = document.getElementById('reset')
+    for (user of users.children) {
+        user.style.opacity = 0
+        setTimeout(function () {
+            users.removeChild(user)
+        }, 500);
+    }
 }
 
 function search(user) {
@@ -99,7 +122,6 @@ function search(user) {
                 <p id="donator-${user}"># <u>Donator</u>: </p>
                 <p id="donator-tier-${user}"></p>
                 <p id="donator-badge-${user}"></p>
-                <br>
                 <div class="previous-names" id="previous-names-${user}"># <u>Previous Names</u>: </div>
                 <br>
                 <p id="following-${user}"></p>

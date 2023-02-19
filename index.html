@@ -26,12 +26,14 @@
             <div class="search">
                 <input id="search-input" type="text" placeholder="Enter a Username(s) Separated by a Comma or Space" onkeydown="enter(this)">
             </div>
-            <div class="button" id="search-button" onclick="newSearch()"><p>Search</p></div>
-            <div class="button" id="add-user-button" onclick="addUser()"><p>Add</p></div>
+            <div class="button" onclick="newSearch()"><p>Search</p></div>
+            <div class="button" onclick="addUser()"><p>Add</p></div>
+            <div class="button" onclick="deleteAllUsers()"><p>Clear</p></div>
         </div>
     </div>
     
     <div id="reset"></div>
+    <img id="mugi" src="assets/mugi.png">
 
 </body>
     <script type="text/javascript" src="/script.js"></script>
