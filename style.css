@@ -280,7 +280,6 @@ a {
     position: fixed;
     transition-duration: 0.1s;
     transition-property: opacity;
-    cursor: pointer;
 }
 
 #about-links-background {
@@ -289,19 +288,24 @@ a {
     background-color: var(--perm-dark);
     filter: brightness(0.5);
     opacity: 0.4;
+    cursor: pointer;
 }
 
 #about-links-page {
     --width: 25rem;
     --height: 40rem;
+    --menu-height-center: calc(100vh / 2 - var(--height) / 2 - 1rem);
     background-color: var(--perm-light);
     position: absolute;
-    top: calc(100vh / 2 - var(--height) / 2 - 1rem);
     left: calc(100vw / 2 - var(--width) / 2 - 1rem);
     width: var(--width);
     height: var(--height);
     border-radius: 1rem;
     padding: 1rem;
+
+    top: calc(var(--menu-height-center) + 2rem);
+    transition-duration: 0.2s;
+    transition-property: top;
 }
 
 .x-button {

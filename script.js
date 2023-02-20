@@ -27,12 +27,20 @@ function searchFormat() {
 
 function newSearch() {
     users = searchFormat()
+    if (users.length == 0) {
+        sendError('Search is empty')
+        return
+    }
     window.open('/?user=' + users, '_self')
 }
 
 function addUser() {
     var users = searchFormat()
     users = users.split(',')
+    if (users.length == 0 || users.length == 1 && users[0] == '') {
+        sendError('Search is empty')
+        return
+    }
     for (user of users) {
         search(user)
     }
@@ -64,7 +72,7 @@ function closeUser(name) {
     }
 }
 
-function sendError(name) {
+function sendError(message) {
     var ele = document.createElement('div')
     ele.classList.add('error')
     ele.addEventListener("click", function() {
@@ -73,7 +81,7 @@ function sendError(name) {
             errors.removeChild(ele)
         }, 500);
     })
-    ele.innerHTML = '(&nbsp<span style="color: yellow">!</span>&nbsp) User not found: ' + name
+    ele.innerHTML = '(&nbsp<span style="color: yellow">!</span>&nbsp) ' + message
     errors = document.getElementById('errors')
     errors.appendChild(ele)
 
@@ -90,7 +98,8 @@ function deleteAllUsers() {
     for (user of users.children) {
         user.style.opacity = 0
         setTimeout(function () {
-            users.removeChild(user)
+            users.innerHTML = ''
+            return
         }, 500);
     }
 }
@@ -174,7 +183,7 @@ function search(user) {
         .then(handleData)
         .catch((error) => {
             console.log(error)
-            sendError(user)
+            sendError('User not found: ' + user)
             document.getElementById(`page-${user}`).remove()
             return
         })
@@ -274,6 +283,7 @@ function handleData(data) {
         .then(handleDataFollow)
         .catch((error) => {
             // console.log(error)
+            sendError("Didn't work (rate-limited?)")
         })
 
     function handleResponseFollow(response) {

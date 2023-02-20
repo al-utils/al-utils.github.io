@@ -34,7 +34,11 @@ function showAbout() {
     ele.style.display = ''
     setTimeout(function () {
         ele.style.opacity = 1
+        ele2 = document.getElementById('about-links-page')
+        ele2.style.top = 'var(--menu-height-center)'
     }, 100)
+
+
 }
 
 function hideAbout() {
@@ -43,4 +47,6 @@ function hideAbout() {
     setTimeout(function () {
         ele.style.display = 'none'
     }, 100)
+    ele2 = document.getElementById('about-links-page')
+    ele2.style.top = 'calc(var(--menu-height-center) + 2rem)'
 }
