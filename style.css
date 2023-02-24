@@ -325,7 +325,7 @@ a {
 }
 
 #errors {
-    position: absolute;
+    position: fixed;
     width: 20rem;
     padding: 1rem;
     right: 0;
