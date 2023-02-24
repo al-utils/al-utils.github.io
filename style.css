@@ -237,7 +237,9 @@ a {
 #icon {
     background-color: var(--dark);
     mask: url(/assets/anilist.svg) no-repeat 0px 5rem;
+    -webkit-mask: url(/assets/anilist.svg) no-repeat 0px 5rem;
     mask-size: contain;
+    -webkit-mask-size: contain;
     height: 5rem;
     width: 5rem;
     margin: auto;
@@ -314,7 +316,9 @@ a {
     top: 1rem;
     background-color: white;
     mask: url(/assets/x.svg) no-repeat;
+    -webkit-mask: url(/assets/x.svg) no-repeat;
     mask-size: contain;
+    -webkit-mask-size: contain;
     height: 1.5rem;
     width: 1.5rem;
     cursor: pointer;
@@ -367,8 +371,10 @@ a {
 
 #theme-icon[theme="dark"] {
     mask: url('/assets/moon-filled.svg') no-repeat center;
+    -webkit-mask: url('/assets/moon-filled.svg') no-repeat center;
 }
 
 #theme-icon[theme="light"] {
     mask: url('/assets/sun-filled.svg') no-repeat center;
+    -webkit-mask: url('/assets/sun-filled.svg') no-repeat center;
 }
