@@ -158,6 +158,18 @@ a {
     line-height: 0rem;
 }
 
+.x-button-about {
+    float: right;
+    background-color: var(--dark);
+    mask: url(/assets/x.svg) no-repeat;
+    -webkit-mask: url(/assets/x.svg) no-repeat;
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    height: 1.5rem;
+    width: 1.5rem;
+    cursor: pointer;
+}
+
 .avatar {
     border-radius: 0.5rem;
 }
@@ -250,11 +262,11 @@ a {
 #header {
     text-align: center;
     margin: auto;
-    color: var(--dark)
+    color: var(--dark);
 }
 
 #header p {
-    line-height: 0px;
+    line-height: 1rem;
 }
 
 .container {

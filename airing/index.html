@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airing | al-utils</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/airing/style.css">
+</head>
+<body>
+    
+<div id="content">
+    <div id="search">
+        <div id="header">
+            <div class="back">◂ <a href="/">back to lookup</a></div>
+            <p>Generate a chart for airing anime</p>
+            <p style="line-height: 1rem">watching + planning lists</p>
+        </div>
+    
+        <div class="content">
+            <div class="search" id="search">
+                <div class="search">
+                    <input id="search-input" type="text" placeholder="Enter a Username" onkeydown="enter(this)">
+                </div>
+            </div>
+            <div class="button" onclick="newSearch()"><p>Search</p></div>
+            <div id="theme-switcher" onclick="switchTheme()">
+                <div theme="light" id="theme-icon">&nbsp</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="chart"></div>
+</div>
+
+</body>
+    <script type="text/javascript" src="/template.js"></script>
+    <script type="text/javascript" src="/script.js"></script>
+    <script type="text/javascript" src="/airing/airing.js"></script>
+    <script type="text/javascript" src="/theme.js"></script>
+</html>

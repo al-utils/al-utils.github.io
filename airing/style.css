@@ -1,0 +1,73 @@
+#header {
+    padding-top: 15rem;
+}
+
+.back {
+    padding-bottom: 50px;
+    text-align: left;
+    max-width: 564px;
+    width: 80vw;
+    margin: auto;
+    color: var(--accent);
+    cursor: pointer;
+    user-select: none;
+}
+
+.back a {
+    text-decoration: none;
+}
+
+.back a:hover {
+    text-decoration: underline;
+}
+
+#chart {
+    width: 80vw;
+    max-width: 1064px;
+    margin: 3rem auto;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.chart-square {
+    background-color: var(--dark);
+    background-color: white;
+    height: 20rem;
+    background-position: center;
+    background-size: cover;
+    border-radius: 0.3rem;
+    position: relative;
+    color: #efefef;
+}
+
+.gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, #151515, transparent, transparent);
+    border-radius: 0.3rem;
+}
+
+.title {
+    position: absolute;
+    width: calc(100% - 2rem);
+    /* https://stackoverflow.com/a/41137262 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    bottom: 1.5rem;
+    left: 1rem;
+}
+
+.sub {
+    position: absolute;
+    line-height: 0;
+    bottom: 0.5rem;
+    left: 1rem;
+    width: calc(100% - 2rem);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

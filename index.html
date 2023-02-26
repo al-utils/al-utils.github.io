@@ -6,56 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lookup | al-utils</title>
     <link rel="stylesheet" href="/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
 </head>
 <body>
     
-    <div id="errors"></div>
-    <div class="pattern"></div>
+<div id="content">
+    <div id="header">
+        <div id="icon">&nbsp</div>
+        <p id="idk"><u>Un</u>official Tool(s) for <a href="https://anilist.co">Anilist</a> | <a href="https://github.com/al-utils">GitHub</a></p>
+        <p>Contact: <a href="https://anilist.co/user/5641461">@Java</a></p>
+        <p>Tools: <a href="/airing/">/airing/</a></p>
+    </div>
+
+    <div class="content">
+        <div class="search" id="search">
+            <div class="search">
+                <input id="search-input" type="text" placeholder="Enter a Username(s) Separated by a Comma or Space" onkeydown="enter(this)">
+            </div>
+        </div>
+        <div class="button" onclick="newSearch()"><p>Search</p></div>
+        <div class="button" onclick="addUser()"><p>Add</p></div>
+        <div class="button" onclick="deleteAllUsers()"><p>Clear</p></div>
+        <div id="theme-switcher" onclick="switchTheme()">
+            <div theme="light" id="theme-icon">&nbsp</div>
+        </div>
+    </div>
     
-    <div class="container">
-        <div id="header">
-            <div id="icon">&nbsp</div>
-            <p id="idk"><u>Un</u>official Tool(s) for <a href="https://anilist.co">Anilist</a> | <a href="https://github.com/al-utils">GitHub</a></p>
-            <p style="line-height: 2rem">Contact: <a href="https://anilist.co/user/5641461">@Java</a></p>
-        </div>
-
-        <div class="content">
-            <div class="search" id="search">
-                <div class="search">
-                    <input id="search-input" type="text" placeholder="Enter a Username(s) Separated by a Comma or Space" onkeydown="enter(this)">
-                </div>
-            </div>
-            <div class="button" onclick="newSearch()"><p>Search</p></div>
-            <div class="button" onclick="addUser()"><p>Add</p></div>
-            <div class="button" onclick="deleteAllUsers()"><p>Clear</p></div>
-            <div id="theme-switcher" onclick="switchTheme()">
-                <div theme="light" id="theme-icon">&nbsp</div>
-            </div>
-        </div>
-        
-        <div id="reset"></div>
-        <img id="mugi" src="assets/mugi.png">
-    </div>
-
-    <div id="footer">(c) 2023 Java | <span class="about-links" onclick="showAbout()">About</span></div>
-
-    <div id="about-links" style="opacity: 0; display: none">
-        <div id="about-links-background" onclick="hideAbout()"></div>
-        <div id="about-links-page">
-            # about
-            <br>
-            <br>font: <a href="https://github.com/floriankarsten/space-grotesk">Space Grotesk</a>
-            <br>monospace font: Envy Code R
-            <br>
-            <br>icons: <a href="https://tabler-icons.io">Tabler Icons</a>
-            <br><a herf="https://icones.js.org/collection/all?s=anilist">anilist svg</a>
-            <br>
-            <br>anilist <a href="https://github.com/AniList/ApiV2-GraphQL-Docs">api</a>
-        </div>
-    </div>
+    <div id="reset"></div>
+    <img id="mugi" src="../assets/mugi.png">
+</div>
 
 </body>
+    <script type="text/javascript" src="/template.js"></script>
     <script type="text/javascript" src="/script.js"></script>
+    <script type="text/javascript" src="/lookup.js"></script>
     <script type="text/javascript" src="/theme.js"></script>
 </html>
