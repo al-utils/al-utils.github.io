@@ -212,6 +212,10 @@ a {
     #reset {
         scrollbar-width: none;
     }
+
+    #mugi {
+        display: none;
+    }
 }
 
 #reset a {

@@ -1,7 +1,31 @@
+let darkMode = sessionStorage.getItem('darkMode')
+if (darkMode == null || darkMode === 'undefined') {
+    darkMode = 'false'
+    sessionStorage.setItem('darkMode', 'false')
+} else if (darkMode == 'true') {
+    // manual theme change
+    root = document.querySelector(':root')
+    style = getComputedStyle(root)
+    dark = style.getPropertyValue('--dark')
+    light = style.getPropertyValue('--light')
+    root.style.setProperty('--light', dark)
+    root.style.setProperty('--dark', light)
+    root.style.setProperty('--card-background', 'var(--card-dark)')
+}
+
+function iconDark() { // called after icon loaded
+    icon = document.getElementById('theme-icon')
+    if (darkMode == 'true')
+        icon.setAttribute('theme', 'dark')
+    else
+        icon.setAttribute('theme', 'light')
+}
+
 function switchTheme() {
     button = document.getElementById('theme-switcher')
     icon = document.getElementById('theme-icon')
-    current = icon.getAttribute('theme')
+    // current = icon.getAttribute('theme')
+    current = darkMode
 
     style = getComputedStyle(document.body)
     root = document.querySelector(':root')
@@ -13,7 +37,7 @@ function switchTheme() {
     icon.style.backgroundColor = bg
     // this animation took forever to figure out (:
     setTimeout(function () {
-        if (current == 'light') {
+        if (current == 'false') {
             root.style.setProperty('--card-background', 'var(--card-dark)')
             icon.setAttribute('theme', 'dark')
         } else {
@@ -27,26 +51,11 @@ function switchTheme() {
         root.style.setProperty('--light', dark)
         root.style.setProperty('--dark', light)
     }, delay / 2)
-}
-
-function showAbout() {
-    ele = document.getElementById('about-links')
-    ele.style.display = ''
-    setTimeout(function () {
-        ele.style.opacity = 1
-        ele2 = document.getElementById('about-links-page')
-        ele2.style.top = 'var(--menu-height-center)'
-    }, 100)
-
-
-}
-
-function hideAbout() {
-    ele = document.getElementById('about-links')
-    ele.style.opacity = 0
-    setTimeout(function () {
-        ele.style.display = 'none'
-    }, 100)
-    ele2 = document.getElementById('about-links-page')
-    ele2.style.top = 'calc(var(--menu-height-center) + 2rem)'
+    if (darkMode == 'true') {
+        darkMode = 'false'
+        sessionStorage.setItem('darkMode', 'false')
+    } else {
+        darkMode = 'true'
+        sessionStorage.setItem('darkMode', 'true')
+    }
 }
