@@ -246,7 +246,7 @@ function search(user) {
                                     <p class="title">${data[key].title['english']}</p>
                                     <div class="sub">
                                         <p style="text-align: left">${secondsToString(seperate[id]['timeUntilAiring'])}</p>
-                                        <p style="text-align: right">${seperate[id]['episode']}/${data[key].episodes}</p>
+                                        <p style="text-align: right; filter: brightness(0.75)">${seperate[id]['episode']}/${data[key].episodes}</p>
                                     </div>
                                 </div>
                             </div>
