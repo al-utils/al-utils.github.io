@@ -266,3 +266,5 @@ function search(user) {
 }
 
 // at least it works...
+
+// TODO: option only watching list

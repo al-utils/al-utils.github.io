@@ -81,7 +81,8 @@ body {
 }
 
 a {
-    color: var(--accent)
+    color: var(--accent);
+    text-decoration: none;
 }
 
 #search-input {

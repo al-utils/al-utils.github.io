@@ -8,7 +8,7 @@ template = `
         
     </div>
 
-    <div id="footer">(c) 2023 Java | <span class="about-links" onclick="showAbout()">About</span></div>
+    <div id="footer">(c) 2023 Java | <span class="about-links" onclick="showAbout()">About</span> | <a href="https://github.com/al-utils">GitHub</a></div>
 
     <div id="about-links" style="opacity: 0; display: none">
         <div id="about-links-background" onclick="hideAbout()"></div>
