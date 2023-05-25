@@ -41,6 +41,20 @@ function newSearch() {
 
 function search(user) {
 
+    let loading = document.getElementById('loading')
+    loading.style.display = ''
+
+    x = setInterval(function() {
+        if (loading.style.display == 'none') {
+            return
+        }
+        console.log('test')
+        loading.textContent += '.'
+        if (loading.textContent.length > 10) {
+            loading.textContent = 'loading'
+        }
+    }, 300)
+
     // query to get id from name
     var url = 'https://graphql.anilist.co'
     var options = {
@@ -253,6 +267,9 @@ function search(user) {
                         `
                         grid.appendChild(ele)
                     });
+
+                    // hide loading
+                    loading.style.display = 'none'
                 }
 
                 function secondsToString(s) {
