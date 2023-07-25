@@ -5,7 +5,6 @@ if (userQuery !== '' && userQuery !== null) {
     }
 }
 
-
 function enter(ele) {
     var user = document.getElementById('search-input').value
     if (event.key === 'Enter' && user !== '') {
@@ -78,8 +77,6 @@ function deleteAllUsers() {
         }, 500);
     }
 }
-
-
 
 function search(user) {
     if (user == '' || user === null || userExists(user)) {
